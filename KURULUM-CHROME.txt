@@ -1,0 +1,60 @@
+Hayâ · Tevhid Medya
+Chrome ses motoru 0.12.23 — kurulum rehberi
+
+Görüntü filtresi Chrome eklentisinde çalışır. Müzik izolasyonu için bu motoru
+bir kez kurun. Python ve ses modeli ZIP'in içindedir; ayrıca Python kurmayın.
+
+1. Eklentiyi Chrome Web Mağazası'ndan kurun:
+   https://chromewebstore.google.com/detail/fkgjadiaajefdlgofbeidhghmhcniifk
+   Mağaza incelemesi sürüyorsa kurulum düğmesi henüz görünmeyebilir.
+
+2. Uygun ZIP'i indirin:
+   Windows 10/11, Intel/AMD 64 bit: windows-x64
+   Linux masaüstü, Intel/AMD 64 bit: linux-x64
+   Mac M1/M2/M3/M4/M5 (Apple Silicon): macos-arm64
+   Intel Mac, 32 bit sistemler, Windows ARM, iPhone ve Android desteklenmez.
+
+3. ZIP'in tamamını bilgisayarınızda kalıcı bir klasöre çıkarın.
+   ZIP içinden çalıştırmayın. Yaklaşık 2 GB boş yer ayırın; ZIP'i saklayacaksanız
+   indirme boyutu kadar ek yer gerekir. Klasörü kurulumdan sonra taşımayın.
+
+4. Çıkardığınız klasörde:
+   Windows: KUR-Windows.bat dosyasını açıp kurulum sorusunu onaylayın.
+   Mac: KUR-Mac.command dosyasını açıp kurulum sorusunu onaylayın.
+   Linux: terminali bu klasörde açın ve bash KUR-Linux.sh çalıştırın.
+   Bu işlem Chrome bağlantısını yalnızca mevcut kullanıcıya kaydeder.
+   İşletim sistemi paketi engellerse güvenlik ayarlarını kapatmayın; destek alın.
+   Bu ön sürümün yükleyicileri henüz yayıncı sertifikasıyla imzalanmamıştır.
+
+5. Chrome'da Hayâ menüsü > Kurulum ve bilgiler > Bağlan'ı seçin.
+   Motor ilk seferinde modeli belleğe yükler. Sonraki videolarda otomatik açılır.
+   Eşleştirme kodunu elle girmeniz veya terminali açık tutmanız gerekmez.
+   Motor açılmadığında görüntü filtresi bağımsız kullanılabilir.
+
+Windows'ta DLL/ses bileşeni hatası olursa ZIP'teki prerequisites/VC_redist.x64.exe
+resmi Microsoft bileşenini kurup Bağlan'ı yeniden deneyin.
+
+Linux'ta grafik kurulum penceresi açılamazsa aynı klasörde:
+   ./runtime/bin/python3 -X utf8 -I -B packaging/install_native.py
+Ubuntu 22.04 temel alınır. Güncel Kali/Debian için sistem kitaplıkları gerekebilir;
+her dağıtımda canlı oynatma doğrulanmış değildir. Alpine/musl desteklenmez.
+
+Bu paket mağaza kimliği fkgjadiaajefdlgofbeidhghmhcniifk için hazırlanmıştır.
+Paket içindeki extension klasörünü ayrıca yüklemeyin. Eski ONCE-BUNU-OKUYUN.txt
+dosyasındaki manuel eşleştirme/özel test adımları mağaza kurulumu için gerekmez;
+bu rehberdeki KUR-* ve Bağlan yolunu kullanın.
+
+Filtreler: Görüntü açık/kapalı ve müzik açık/kapalı bağımsızdır. İlk hazırlıkta
+birkaç saniye bekleme olabilir. Hız donanıma ve videoya bağlıdır; kusursuz tespit
+ve enstrümanların tamamen kaldırılması garanti edilmez. Şarkı vokali kalabilir.
+
+Kaldırma: KALDIR-* dosyasını çalıştırın. Bu, Chrome bağlantısını kaldırır;
+motor dosyalarını, ayarlarınızı veya günlükleri otomatik silmez.
+
+Lisans ve kaynak: ZIP içindeki LICENSE, THIRD_PARTY_NOTICES.md ve
+source/haya-source.zip dağıtımın parçasıdır. GitHub'daki geliştirme deposunun
+private olması, paketi alan kişinin lisans kapsamındaki haklarını kısıtlamaz.
+
+Güncel indirmeler: https://sultanamed.github.io/haya-privacy/kurulum.html
+Gizlilik: https://sultanamed.github.io/haya-privacy/
+Destek: amedyasar@gmail.com
