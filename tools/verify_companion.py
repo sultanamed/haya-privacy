@@ -129,7 +129,7 @@ def main():
                 mode = info.external_attr >> 16
                 if mode and path.is_file():
                     path.chmod(stat.S_IMODE(mode))
-        root = work / ('Haya-0.12.23-' + target)
+        root = (work / ('Haya-0.12.23-' + target)).resolve()
         config = json.loads((root / 'native/host-config.json').read_text())
         assert config['allowed_origins'] == [ORIGIN]
         interpreter = root / ('runtime/python.exe' if sys.platform == 'win32' else 'runtime/bin/python3')
@@ -161,11 +161,24 @@ def main():
             report['native_uninstallation_tested'] = True
             report['ok'] = True
         finally:
+            if not report.get('ok'):
+                data_root = (Path.home() / 'Library/Application Support' if sys.platform == 'darwin' else
+                             Path(os.environ.get('LOCALAPPDATA', str(Path.home() / 'AppData/Local'))) if sys.platform == 'win32' else
+                             Path(os.environ.get('XDG_DATA_HOME', str(Path.home() / '.local/share'))))
+                log = data_root / 'TevhidMedyaOfisi/Haya/motor.log'
+                if log.is_file():
+                    diagnostic = log.read_text(errors='replace')[-5000:]
+                    diagnostic = re.sub(r'(?i)(token[=: ]+)[A-Za-z0-9_-]+', r'\1[redacted]', diagnostic)
+                    print('Motor diagnostic: ' + diagnostic)
             if installer is not None:
                 installer.uninstall(root, home=home)
             if root is not None:
                 stop_test_motor(root)
-            time.sleep(.5)
+            for _ in range(40):
+                with socket.socket() as probe:
+                    if probe.connect_ex(('127.0.0.1', 8765)) != 0:
+                        break
+                time.sleep(.25)
             args.report.parent.mkdir(parents=True, exist_ok=True)
             args.report.write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report))
